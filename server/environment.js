@@ -36,7 +36,7 @@ var all = {
 
   // MongoDB connection options
   mongo: {
-    uri: process.env.MONGO_URI || 'mongodb://localhost/fda-dev',
+    uri: process.env.MONGODB_URI || 'mongodb://localhost/fda-dev',
     options: {
       useNewUrlParser: true
     }
