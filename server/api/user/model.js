@@ -24,6 +24,8 @@ const UserSchema = new Schema({
   provider: String,
   salt: String,
   facebook: {},
+  reddit: {},
+  linkedin: {},
   google: {}
 });
 
@@ -88,16 +90,6 @@ UserSchema
 const validatePresenceOf = function(value) {
   return value && value.length;
 };
-
-UserSchema
-  .pre('save', function(next) {
-    if (!this.isNew) return next();
-
-    if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1)
-      next(new Error('Invalid password'));
-    else
-      next();
-  });
 
 UserSchema.methods = {
   authenticate: function(plainText) {
