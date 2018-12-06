@@ -60,7 +60,7 @@ function setTokenCookie(req, res) {
   const token = signToken(req.user._id, req.user.role);
 
   res.cookie('token', JSON.stringify(token));
-  return res.redirect('/');
+  return res.redirect(process.env.APP_SERVER);
 }
 
 module.exports = {

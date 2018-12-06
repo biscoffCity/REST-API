@@ -1,6 +1,10 @@
+const logger = require('./logger');
+
 function handleError(response, error) {
+  logger.error(error);
   return response.status(500).send({
     message: 'Internal server error',
+    error: error.message
   });
 }
 
