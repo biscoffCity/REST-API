@@ -5,11 +5,9 @@ const router = express.Router();
 
 router
   .get('/', passport.authenticate('linkedin', {
-    state: 'null'
+    scope: ['r_basicprofile', 'r_emailaddress']
   }))
   .get('/callback', passport.authenticate('linkedin', {
-    successRedirect: '/home',
-    failureRedirect: '/register',
     session: false
   }), auth.setTokenCookie);
 

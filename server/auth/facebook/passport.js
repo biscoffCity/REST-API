@@ -1,5 +1,6 @@
 const passport = require('passport');
 const {Strategy} = require('passport-facebook');
+const crypto = require('crypto');
 
 function setup(User, {facebook}) {
   return passport.use(new Strategy({
@@ -18,7 +19,7 @@ function setup(User, {facebook}) {
 
       user = new User({
         name: profile.displayName,
-        email: profile.emails[0].value,
+        email: profile.emails || 'test@' + crypto.randomBytes(32).toString('hex') + '.com',
         role: 'user',
         username: profile.username,
         provider: 'facebook',
