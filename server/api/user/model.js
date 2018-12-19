@@ -80,8 +80,8 @@ UserSchema
     }, (err, user) => {
       if(err) throw err;
       if(user) {
-        if(this.id === user.id) return respond(true);
-        return respond(false);
+        if(this.id === user.id) return true;
+        return false;
       }
       return true;
     });

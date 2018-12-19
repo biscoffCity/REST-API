@@ -13,6 +13,10 @@ const server = require('http').createServer(app);
 require('./express')(app);
 require('./routes')(app);
 
+if (config.seedDB) {
+  require('./seed');
+}
+
 server.listen(config.port, config.ip, function () {
   logger.info('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
