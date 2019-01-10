@@ -20,7 +20,9 @@ async function getAll(req, res) {
 
 async function create(request, response, next) {
   try {
+    console.log(request.body);
     const newPost = new Post({
+      // author: '5c19b61576f9fe03f0e53081',
       author: request.body.user._id,
       content: request.body.content
     });

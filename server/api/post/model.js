@@ -6,7 +6,9 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  content: String,
+  content: {
+    type: String
+  },
   votes: {
     type: String,
     default: '0'

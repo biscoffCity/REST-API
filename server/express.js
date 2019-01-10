@@ -10,6 +10,7 @@ const passport = require('passport');
 const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 module.exports = function(app) {
   app.use(compression());
@@ -25,7 +26,7 @@ module.exports = function(app) {
     saveUninitialized: true,
     store: new mongoStore({ mongooseConnection: mongoose.connection })
   }));
-
   app.use(morgan('dev'));
   app.use(helmet());
+  app.use(cors())
 };
