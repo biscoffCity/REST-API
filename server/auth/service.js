@@ -48,7 +48,7 @@ function hasRole(roleRequired) {
 }
 
 function signToken(id) {
-  return jwt.sign({ _id: id }, config.secrets.session, { expiresIn: 60 * 5 });
+  return jwt.sign({ _id: id }, config.secrets.session, { expiresIn: 60 * 60 * 5 });
 }
 
 function setTokenCookie(req, res) {
@@ -57,10 +57,10 @@ function setTokenCookie(req, res) {
       message: 'Something went wrong, please try again.'
     });
   }
-  const token = signToken(req.user._id, req.user.role);
+  const token = signToken(req.user._id);
 
   res.cookie('token', JSON.stringify(token));
-  return res.redirect(process.env.APP_SERVER);
+  return res.redirect(`${config.app}?token=${token}`);
 }
 
 module.exports = {
