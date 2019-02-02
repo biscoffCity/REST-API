@@ -22,12 +22,12 @@ async function create(request, response, next) {
   try {
     console.log(request.body);
     const newPost = new Post({
-      // author: '5c19b61576f9fe03f0e53081',
       author: request.body.user._id,
-      content: request.body.content
+      content: request.body.content,
+      tags: request.body.tags,
     });
+    console.log(newPost);
     const post = await newPost.save();
-
     return response.status(201).json(post);
   } catch (err) {
     return validationError(response, err);
@@ -51,8 +51,24 @@ function getById(req, res, next) {
     });
 }
 
+async function getTags(req, res, next) {
+  const posts = await Post.distinct('tags').exec();
+
+  return res.json(posts);
+}
+
+async function getByTags(req, res, next) {
+  const posts = await Post.find({
+    'tags': [req.params.tag]
+  }).exec();
+
+  return res.json(posts);
+}
+
 module.exports = {
   create,
   getAll,
-  getById
+  getById,
+  getByTags,
+  getTags,
 };
