@@ -34,21 +34,18 @@ async function create(request, response, next) {
   }
 }
 
-function getById(req, res, next) {
+async function getByUser(req, res, next) {
   const userId = req.params.id;
+  const posts = await Post.find({ author: userId }).exec();
 
-  return User.findById(userId)
-    .exec()
-    .then(user => {
-      if (!user) {
-        return res.status(401).end();
-      }
-      return res.json(user.profile);
-    })
-    .catch(err => {
-      logger.error(err);
-      return next(err);
-    });
+  return res.json(posts);
+}
+
+async function getByReplies(req, res, next) {
+  const userId = req.params.id;
+  const posts = await Post.find({ 'replies.author': userId }).exec();
+
+  return res.json(posts);
 }
 
 async function getTags(req, res, next) {
@@ -68,7 +65,8 @@ async function getByTags(req, res, next) {
 module.exports = {
   create,
   getAll,
-  getById,
+  getByUser,
+  getByReplies,
   getByTags,
   getTags,
 };
