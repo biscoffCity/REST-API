@@ -56,7 +56,7 @@ async function getTags(req, res, next) {
 
 async function getByTags(req, res, next) {
   const posts = await Post.find({
-    'tags': [req.params.tag]
+    'tags': req.params.tag
   }).exec();
 
   return res.json(posts);

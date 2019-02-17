@@ -10,8 +10,8 @@ const PostSchema = new Schema({
     type: String
   },
   votes: {
-    type: String,
-    default: '0'
+    type: Number,
+    default: 0
   },
   replies: [{
     type: Schema.Types.ObjectId,
