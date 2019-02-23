@@ -62,6 +62,30 @@ async function getByTags(req, res, next) {
   return res.json(posts);
 }
 
+async function search(req, res, next) {
+  const query = req.query.search;
+
+  if (!query) {
+    return res.status(404).json({
+      message: 'No query provided.'
+    });
+  }
+
+  const posts = await Post.find({
+    $or: [{
+      'tags': {
+        $regex: query
+      }
+    }, {
+      'content': {
+        $regex: query
+      }
+    }]
+  }).exec();
+
+  return res.json(posts);
+}
+
 module.exports = {
   create,
   getAll,
@@ -69,4 +93,5 @@ module.exports = {
   getByReplies,
   getByTags,
   getTags,
+  search,
 };
