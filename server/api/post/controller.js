@@ -18,32 +18,47 @@ async function getAll(req, res) {
   return res.json(posts);
 }
 
-async function create(request, response, next) {
+async function create(req, res, next) {
   try {
-    console.log(request.body);
     const newPost = new Post({
-      author: request.body.user._id,
-      content: request.body.content,
-      tags: request.body.tags,
+      author: req.body.user._id,
+      content: req.body.content,
+      tags: req.body.tags,
+      original: true
     });
-    console.log(newPost);
     const post = await newPost.save();
-    return response.status(201).json(post);
+
+    return res.status(201).json(post);
   } catch (err) {
-    return validationError(response, err);
+    return validationError(res, err);
   }
 }
 
 async function getByUser(req, res, next) {
   const userId = req.params.id;
-  const posts = await Post.find({ author: userId }).exec();
+  const posts = await Post.find({ author: userId, original: true }).exec();
 
   return res.json(posts);
 }
 
+async function getById(req, res, next) {
+  const postId = req.params.id;
+  const post = await Post.findById(postId).exec();
+
+  return res.json(post);
+}
+
 async function getByReplies(req, res, next) {
   const userId = req.params.id;
-  const posts = await Post.find({ 'replies.author': userId }).exec();
+  const posts = await Post.find({
+    original: true,
+    replies: {
+      $exists: true,
+      $not: {
+        $size: 0
+      }
+    }
+  }).exec();
 
   return res.json(posts);
 }
@@ -86,12 +101,32 @@ async function search(req, res, next) {
   return res.json(posts);
 }
 
+async function setReply(req, res, next) {
+  const questionId = req.params.id;
+  const reply = new Post({
+    author: req.body.author,
+    content: req.body.content,
+    tags: req.body.tags,
+  });
+  const post = await Post.findById(questionId).exec();
+
+  post.replies.push(reply);
+  const [ , updatedPost ] = await Promise.all([
+    reply.save(),
+    post.save()
+  ]);
+
+  return res.json(updatedPost);
+}
+
 module.exports = {
   create,
   getAll,
+  getById,
   getByUser,
   getByReplies,
   getByTags,
   getTags,
   search,
+  setReply,
 };

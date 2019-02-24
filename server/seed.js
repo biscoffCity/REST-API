@@ -18,6 +18,7 @@ module.exports = (async () => {
     content: 'What is the best website to use for a beginner?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['website development'],
     media: {}
   }, {
@@ -25,6 +26,7 @@ module.exports = (async () => {
     content: 'What is the best platform to advertise on for a jewelry brand?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['social media', 'jewelry'],
     media: {}
   }, {
@@ -32,6 +34,7 @@ module.exports = (async () => {
     content: 'Where is the best burger place in harlem?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['harlem', 'burgers'],
     media: {}
   }, {
@@ -39,6 +42,7 @@ module.exports = (async () => {
     content: 'What\'s the largest think tank in America?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['think tank', 'America'],
     media: {}
   }, {
@@ -46,6 +50,7 @@ module.exports = (async () => {
     content: 'Who has the best cotton socks for sale around midtown?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['Midtown', 'cotton socks'],
     media: {}
   }, {
@@ -53,6 +58,7 @@ module.exports = (async () => {
     content: 'Where is the best public school district to move to in New York?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['public schools', 'new york'],
     media: {}
   }, {
@@ -60,6 +66,7 @@ module.exports = (async () => {
     content: 'When do broadway tickets go on sales, and where can I get discounted broadway tickets?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['broadway',  'ticket', 'sales'],
     media: {}
   }, {
@@ -67,6 +74,7 @@ module.exports = (async () => {
     content: 'What is the most popular donut place in Brooklyn?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['donuts', 'brooklyn'],
     media: {}
   }, {
@@ -74,6 +82,7 @@ module.exports = (async () => {
     content: 'How do I choose the best career?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['career'],
     media: {}
   }, {
@@ -81,6 +90,7 @@ module.exports = (async () => {
     content: 'where can I purchase cheap glasses with prescription?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['cheap glasses', 'prescription glasses', 'affordable'],
     media: {}
   }, {
@@ -88,6 +98,7 @@ module.exports = (async () => {
     content: 'How do I care for an aloe vera plant?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['aloe vera'],
     media: {}
   }, {
@@ -95,6 +106,7 @@ module.exports = (async () => {
     content: 'Best skin regiment for brown girl with normal skin?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['brown girl', 'skin care'],
     media: {}
   }, {
@@ -102,6 +114,7 @@ module.exports = (async () => {
     content: 'Where can I get quality hijabs online?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['quality', 'hijabs', 'online'],
     media: {}
   }, {
@@ -109,6 +122,7 @@ module.exports = (async () => {
     content: 'When\'s a good time to travel to Thailand?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['thailand', 'travel'],
     media: {}
   }, {
@@ -116,6 +130,7 @@ module.exports = (async () => {
     content: 'Where can I find the most affordable travel packages?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['Affordable', 'travel', 'packages'],
     media: {}
   }, {
@@ -123,6 +138,7 @@ module.exports = (async () => {
     content: 'How do I build credit?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['credit', 'score', 'how to'],
     media: {}
   }, {
@@ -130,6 +146,7 @@ module.exports = (async () => {
     content: 'what do I need to rent a car?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['car rental', 'inquiry'],
     media: {}
   }, {
@@ -137,6 +154,7 @@ module.exports = (async () => {
     content: 'How do I peel a pomegranate?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['peel', 'pomegranate'],
     media: {}
   }, {
@@ -144,6 +162,7 @@ module.exports = (async () => {
     content: 'how to ease my seasonal affective disorder in the winter?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['seasonal affective disorder'],
     media: {}
   }, {
@@ -151,6 +170,7 @@ module.exports = (async () => {
     content: 'What\'s a good home remedy for a cold/flu?',
     replies: [],
     isDonation: false,
+    original: true,
     tags: ['home remedy', 'cold', 'flu'],
     media: {}
   });

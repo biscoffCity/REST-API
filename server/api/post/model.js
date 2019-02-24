@@ -21,6 +21,10 @@ const PostSchema = new Schema({
     type: Boolean,
     default: false
   },
+  original: {
+    type: Boolean,
+    default: false
+  },
   tags: [],
   media: {}
 });

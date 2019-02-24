@@ -9,6 +9,8 @@ router.get('/tags', controller.getTags);
 router.get('/replies/:id', controller.getByReplies);
 router.get('/tags/:tag', controller.getByTags);
 router.get('/user/:id', controller.getByUser);
+router.get('/:id', controller.getById);
 router.post('/', controller.create);
+router.post('/reply/:id', controller.setReply);
 
 module.exports = router;
