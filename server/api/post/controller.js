@@ -43,7 +43,7 @@ async function getByUser(req, res, next) {
 
 async function getById(req, res, next) {
   const postId = req.params.id;
-  const post = await Post.findById(postId).exec();
+  const post = await Post.findById(postId).populate('replies').exec();
 
   return res.json(post);
 }
@@ -71,7 +71,8 @@ async function getTags(req, res, next) {
 
 async function getByTags(req, res, next) {
   const posts = await Post.find({
-    'tags': req.params.tag
+    tags: req.params.tag,
+    original: true
   }).exec();
 
   return res.json(posts);
