@@ -26,7 +26,12 @@ const PostSchema = new Schema({
     default: false
   },
   tags: [],
-  media: {}
+  media: {},
+  type: {
+    type: String,
+    default: 'text',
+    enum: ['audio', 'text', 'video', 'image']
+  }
 });
 
 module.exports = mongoose.model('Post', PostSchema);
