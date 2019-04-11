@@ -36,7 +36,8 @@ async function create(req, res, next) {
 
 async function getByUser(req, res, next) {
   const userId = req.params.id;
-  const posts = await Post.find({ author: userId, original: true }).exec();
+  const isOriginal = req.params.original;
+  const posts = await Post.find({ author: userId, original: isOriginal }).exec(); 
 
   return res.json(posts);
 }

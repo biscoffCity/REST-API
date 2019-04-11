@@ -8,7 +8,7 @@ router.get('/search', controller.search);
 router.get('/tags', controller.getTags);
 router.get('/replies/:id', controller.getByReplies);
 router.get('/tags/:tag', controller.getByTags);
-router.get('/user/:id', controller.getByUser);
+router.get('/user/:id/:original', controller.getByUser);
 router.get('/:id', controller.getById);
 router.post('/', controller.create);
 router.post('/reply/:id', controller.setReply);
