@@ -70,6 +70,26 @@ async function getTags(req, res, next) {
   return res.json(posts);
 }
 
+async function doesTagExist(req, res, next) {
+  const posts = await Post.find({
+    tags: req.params.newTag,
+  }).exec();
+  if (posts.length !== 0) {
+    return res.json(true);
+  }
+  try {
+    const newPost = new Post ({
+      content: '',
+      original: true,
+      tags: req.params.newTag
+    });
+    const post = await newPost.save();
+    return res.status(201).json(post);
+  } catch (err) {
+    return validationError(res, err);
+  } 
+}
+
 async function getByTags(req, res, next) {
   const posts = await Post.find({
     tags: req.params.tag,
@@ -131,4 +151,5 @@ module.exports = {
   getTags,
   search,
   setReply,
+  doesTagExist,
 };

@@ -12,5 +12,6 @@ router.get('/user/:id/:original', controller.getByUser);
 router.get('/:id', controller.getById);
 router.post('/', controller.create);
 router.post('/reply/:id', controller.setReply);
+router.get('/newtags/:newTag', controller.doesTagExist);
 
 module.exports = router;
