@@ -1,4 +1,5 @@
 const get = require('lodash/get');
+const set = require('lodash/set');
 const Post = require('./model');
 const User = require('../user/model');
 const config = require('../../environment');
@@ -18,10 +19,14 @@ async function getAll(req, res) {
   return res.json(posts);
 }
 
+function getUser(request) {
+  return request.body.user || request.user;
+}
+
 async function create(req, res, next) {
   try {
     const newPost = new Post({
-      author: req.body.user._id,
+      author: getUser(req)._id,
       content: req.body.content,
       tags: req.body.tags,
       original: true
@@ -37,7 +42,7 @@ async function create(req, res, next) {
 async function getByUser(req, res, next) {
   const userId = req.params.id;
   const isOriginal = req.params.original;
-  const posts = await Post.find({ author: userId, original: isOriginal }).exec(); 
+  const posts = await Post.find({ author: userId, original: isOriginal }).exec();
 
   return res.json(posts);
 }
@@ -78,7 +83,7 @@ async function doesTagExist(req, res, next) {
     return res.json(true);
   }
   try {
-    const newPost = new Post ({
+    const newPost = new Post({
       content: '',
       original: true,
       tags: req.params.newTag
@@ -87,7 +92,7 @@ async function doesTagExist(req, res, next) {
     return res.status(201).json(post);
   } catch (err) {
     return validationError(res, err);
-  } 
+  }
 }
 
 async function getByTags(req, res, next) {
@@ -125,11 +130,25 @@ async function search(req, res, next) {
 
 async function setReply(req, res, next) {
   const questionId = req.params.id;
-  const reply = new Post({
-    author: req.body.author,
-    content: req.body.content,
-    tags: req.body.tags,
-  });
+  const postObject = {
+    author: req.body.author || getUser(req)._id
+  };
+
+  try {
+    if (req.files && req.files.length) {
+      const file = req.files[0];
+
+      postObject.type = file.fieldname;
+      set(postObject, `media.${postObject.type}`, file.location);
+    } else {
+      postObject.content = req.body.content;
+      postObject.tags = req.body.tags;
+    }
+  } catch (error) {
+    logger.error(error);
+  }
+
+  const reply = new Post(postObject);
   const post = await Post.findById(questionId).exec();
 
   post.replies.push(reply);
