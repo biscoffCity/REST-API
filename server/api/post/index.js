@@ -36,9 +36,11 @@ const upload = multer({
         case 'audio':
           prefix = 'audios';
           ext = '.mp3';
+          break;
         case 'image':
           prefix = 'images';
           ext = '.jpeg';
+          break;
         default:
           break;
       }
