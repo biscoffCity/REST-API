@@ -55,8 +55,13 @@ module.exports = {
     access_key: process.env.AWS_ACCESS_KEY || 'yehup_key',
     access_secret: process.env.AWS_ACCESS_SECRET || 'yehup_secret'
   },
+  stripe: {
+    publishable_key: process.env.STRIPE_KEY || 'id',
+    secret_key: process.env.STRIPE_SECRET || 'secret',
+  },
   papertrail: {
     host: process.env.PAPERTRAIL_URL || 'url',
     port: process.env.PAPERTRAIL_PORT || 'port'
   }
 };
+
