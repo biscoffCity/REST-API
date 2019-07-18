@@ -41,6 +41,10 @@ const upload = multer({
           prefix = 'images';
           ext = '.jpeg';
           break;
+        case 'video':
+          prefix = 'videos';
+          ext = '.mp4';
+          break;
         default:
           break;
       }
