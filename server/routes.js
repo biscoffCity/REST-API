@@ -9,6 +9,7 @@ function handleError(response, error) {
 
 module.exports = function(app) {
   app.use('/api/posts', require('./api/post'));
+  app.use('/api/transactions', require('./api/transaction'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
