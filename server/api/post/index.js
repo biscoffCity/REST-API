@@ -64,5 +64,6 @@ router.get('/:id', controller.getById);
 router.post('/', controller.create);
 router.post('/reply/:id', upload.any(), auth.isAuthenticated(), controller.setReply);
 router.get('/newtags/:newTag', controller.doesTagExist);
+router.delete('/:id', auth.isAuthenticated(), controller.removePost);
 
 module.exports = router;

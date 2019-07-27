@@ -39,6 +39,18 @@ async function create(req, res, next) {
   }
 }
 
+async function removePost(req, res, next) {
+  const _id = req.params.id
+  Post.findByIdAndRemove(_id, (err, post) => {     
+      if (err) return res.status(500).send(err);
+      const response = {
+          message: "Post successfully deleted",
+          id: post._id
+      };
+      return res.status(200).send(response);
+  });
+}
+
 async function getByUser(req, res, next) {
   const userId = req.params.id;
   const isOriginal = req.params.original;
@@ -171,4 +183,5 @@ module.exports = {
   search,
   setReply,
   doesTagExist,
+  removePost,
 };
