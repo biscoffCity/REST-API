@@ -41,7 +41,7 @@ async function create(req, res, next) {
 
 async function removePost(req, res, next) {
   const _id = req.params.id
-  Post.findByIdAndRemove(_id, (err, post) => {     
+  Post.findByIdAndRemove(_id, (err, post) => {
       if (err) return res.status(500).send(err);
       const response = {
           message: "Post successfully deleted",
@@ -172,6 +172,28 @@ async function setReply(req, res, next) {
   return res.json(updatedPost);
 }
 
+async function upvote(req, res) {
+  const replyId = req.params.id;
+  const post = await Post.findByIdAndUpdate(replyId, {
+    $addToSet: {
+      'votes': req.body.author || getUser(req)._id
+    }
+  }).exec();
+
+  return res.json(post);
+}
+
+async function downvote(req, res) {
+  const replyId = req.params.id;
+  const post = await Post.findByIdAndUpdate(replyId, {
+    $pull: {
+      'votes': String(req.body.author || getUser(req)._id)
+    }
+  }).exec();
+
+  return res.json(post);
+}
+
 module.exports = {
   create,
   getAll,
@@ -184,4 +206,6 @@ module.exports = {
   setReply,
   doesTagExist,
   removePost,
+  upvote,
+  downvote
 };

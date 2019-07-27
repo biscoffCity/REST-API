@@ -62,6 +62,8 @@ router.get('/tags/:tag', controller.getByTags);
 router.get('/user/:id/:original', controller.getByUser);
 router.get('/:id', controller.getById);
 router.post('/', controller.create);
+router.post('/:id/vote', auth.isAuthenticated(), controller.upvote);
+router.delete('/:id/vote', auth.isAuthenticated(), controller.downvote);
 router.post('/reply/:id', upload.any(), auth.isAuthenticated(), controller.setReply);
 router.get('/newtags/:newTag', controller.doesTagExist);
 router.delete('/:id', auth.isAuthenticated(), controller.removePost);
