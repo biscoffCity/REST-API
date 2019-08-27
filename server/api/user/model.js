@@ -24,7 +24,6 @@ const UserSchema = new Schema({
   provider: String,
   salt: String,
   facebook: {},
-  reddit: {},
   linkedin: {},
   google: {}
 });
