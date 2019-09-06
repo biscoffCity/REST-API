@@ -1,13 +1,15 @@
 const passport = require('passport');
 const {Strategy} = require('passport-linkedin-oauth2');
 const crypto = require('crypto');
+const get = require('lodash/get');
 
 function setup(User, {linkedin}) {
   return passport.use(new Strategy({
     clientID: linkedin.clientID,
     clientSecret: linkedin.clientSecret,
     callbackURL: linkedin.callbackURL,
-    profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline']
+    scope: ['r_liteprofile', 'r_emailaddress'],
+    state: true
   }, (accessToken, refreshToken, profile, done) =>
     User.findOne({
       'linkedin.id': profile.id
@@ -20,11 +22,15 @@ function setup(User, {linkedin}) {
 
       user = new User({
         name: profile.displayName,
-        email: profile.emails[0].value,
+        email: get(profile, 'emails[0].value'),
         role: 'user',
         username: profile.username + crypto.randomBytes(32).toString('hex'),
         provider: 'linkedin',
-        linkedin: profile._json
+        linkedin: {
+          image: {
+            url: get(profile, 'photos[0].value')
+          }
+        }
       });
 
       return user.save()

@@ -4,9 +4,7 @@ const auth = require('../service');
 const router = express.Router();
 
 router
-  .get('/', passport.authenticate('linkedin', {
-    scope: ['r_basicprofile', 'r_emailaddress']
-  }))
+  .get('/', passport.authenticate('linkedin'))
   .get('/callback', passport.authenticate('linkedin', {
     session: false
   }), auth.setTokenCookie);
