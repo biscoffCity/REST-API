@@ -62,8 +62,21 @@ async function getByUser(req, res, next) {
 async function getById(req, res, next) {
   const postId = req.params.id;
   const post = await Post.findById(postId).populate('replies').exec();
-
-  return res.json(post);
+  let response = []
+  for (let i = 0; i < post.replies.length; i++) {
+    const author = await User.findById(post.replies[i].author);
+    let content = {}
+    content.author = author;
+    content.content = post.replies[i].content;
+    content.media = post.replies[i].media;
+    content.votes = post.replies[i].votes;
+    content.type = post.replies[i].type;
+    content.id = post.replies[i]._id;
+    response.push(content) 
+  }
+  let newObj = JSON.parse(JSON.stringify(post));
+  newObj.response = response;
+  return res.json(newObj);
 }
 
 async function getByReplies(req, res, next) {
