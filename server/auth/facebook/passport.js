@@ -21,9 +21,9 @@ function setup(User, {facebook}) {
 
       user = new User({
         name: profile.displayName,
-        email: profile.emails || 'test@' + crypto.randomBytes(32).toString('hex') + '.com',
+        email: profile.emails || 'test@' + crypto.randomBytes(32).toString('hex') + '.com', 
         role: 'user',
-        username: profile.username,
+        username: profile.username || crypto.randomBytes(32).toString('hex'), 
         provider: 'facebook',
         facebook: {
           ...profile._json,

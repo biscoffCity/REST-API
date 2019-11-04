@@ -22,9 +22,9 @@ function setup(User, {linkedin}) {
 
       user = new User({
         name: profile.displayName,
-        email: get(profile, 'emails[0].value'),
+        email: get(profile, 'emails[0].value') || 'test@' + crypto.randomBytes(32).toString('hex') + '.com',
         role: 'user',
-        username: profile.username + crypto.randomBytes(32).toString('hex'),
+        username: profile.username + crypto.randomBytes(32).toString('hex') || crypto.randomBytes(32).toString('hex'),
         provider: 'linkedin',
         linkedin: {
           image: {
